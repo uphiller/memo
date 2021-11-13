@@ -23,4 +23,9 @@ public class MemoController {
     public List<Memo> getMemo() {
         return memoService.getMemo();
     }
+
+    @GetMapping("/test")
+    public String getHello() {
+        return "Hello, JAVA!!";
+    }
 }
