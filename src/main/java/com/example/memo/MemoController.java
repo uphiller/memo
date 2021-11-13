@@ -26,6 +26,6 @@ public class MemoController {
 
     @GetMapping("/test")
     public String getHello() {
-        return "Hello, JAVA22";
+        return "Hello, JAVA22111";
     }
 }
