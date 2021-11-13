@@ -39,16 +39,16 @@ jobs:
           ECR_REPOSITORY: ${{secrets.REPOSITORY_NAME}}
           IMAGE_TAG: latest
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
       - name: Deploy
-          uses: appleboy/ssh-action@master
-          with:
-            host: ${{ secrets.REMOTE_IP }}
-            username: ${{ secrets.REMOTE_SSH_ID }}
-            key: ${{ secrets.REMOTE_SSH_KEY }}
-            port: ${{ secrets.REMOTE_SSH_PORT }}
-            script: |
-              kubectl rollout restart deployment.apps/my-springboot-dm
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.REMOTE_IP }}
+          username: ${{ secrets.REMOTE_SSH_ID }}
+          key: ${{ secrets.REMOTE_SSH_KEY }}
+          port: ${{ secrets.REMOTE_SSH_PORT }}
+          script: |
+            kubectl rollout restart deployment.apps/my-springboot-dm
